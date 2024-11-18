@@ -150,7 +150,7 @@ body {
     color: rgb(0, 0, 0);
 }
 
-@media (max-width: 500px) and (max-height: 700px){
+@media (max-width: 500px) and (max-height: 750px){
     .Container {
         width: 300px;
         height: 400px;
