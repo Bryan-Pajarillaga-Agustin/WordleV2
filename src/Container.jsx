@@ -2,12 +2,14 @@ import { useEffect, useRef, useState } from "react"
 import "../src/Container.css"
 function Container(){
     const [row, setRow] = useState(null)
-    const [currentRow, setCurrentRow] = useState(null)
+    const [defineRow, setDefineRow] = useState(1)
     const [tile, setTiles] = useState(null)
     const [gameState, setGameState] = useState(false)
-    const [answer, setAnswer] = useState("")
+    const [answer, setAnswer] = useState("VIVID")
     const [guess, setGuess] = useState("")
     const [score, setScore] = useState(null)
+    const [showAnswer, setShowAnswer] = useState(null)
+    const [started, setStarted] = useState(false)
 
     const SubmitButton = useRef(null)
     const StartButton = useRef(null)
@@ -27,51 +29,84 @@ function Container(){
     const row5 = useRef(null)
     const row6 = useRef(null)
 
-    const column1 = useRef(null)
-    const column2 = useRef(null)
-    const column3 = useRef(null)
-    const column4 = useRef(null)
-    const column5 = useRef(null)
-    const column6 = useRef(null)
-    const column7 = useRef(null)
-    const column8 = useRef(null)
-    const column9 = useRef(null)
-    const column10 = useRef(null)
-    const column11 = useRef(null)
-    const column12 = useRef(null)
-    const column13 = useRef(null)
-    const column14 = useRef(null)
-    const column15 = useRef(null)
-    const column16 = useRef(null)
-    const column17 = useRef(null)
-    const column18 = useRef(null)
-    const column19 = useRef(null)
-    const column20 = useRef(null)
-    const column21 = useRef(null)
-    const column22 = useRef(null)
-    const column23 = useRef(null)
-    const column24 = useRef(null)
-    const column25 = useRef(null)
-    const column26 = useRef(null)
-    const column27 = useRef(null)
-    const column28 = useRef(null)
-    const column29 = useRef(null)
-    const column30 = useRef(null)
+    const column1 = useRef()
+    const column2 = useRef()
+    const column3 = useRef()
+    const column4 = useRef()
+    const column5 = useRef()
+    const column6 = useRef()
+    const column7 = useRef()
+    const column8 = useRef()
+    const column9 = useRef()
+    const column10 = useRef()
+    const column11 = useRef()
+    const column12 = useRef()
+    const column13 = useRef()
+    const column14 = useRef()
+    const column15 = useRef()
+    const column16 = useRef()
+    const column17 = useRef()
+    const column18 = useRef()
+    const column19 = useRef()
+    const column20 = useRef()
+    const column21 = useRef()
+    const column22 = useRef()
+    const column23 = useRef()
+    const column24 = useRef()
+    const column25 = useRef()
+    const column26 = useRef()
+    const column27 = useRef()
+    const column28 = useRef()
+    const column29 = useRef()
+    const column30 = useRef()
+
+    const TypingKeys1 = useRef()
+    const TypingKeys2 = useRef()
+    const TypingKeys3 = useRef()
+    const TypingKeys4 = useRef()
+    const TypingKeys5 = useRef()
+    const TypingKeys6 = useRef()
+    const TypingKeys7 = useRef()
+    const TypingKeys8 = useRef()
+    const TypingKeys9 = useRef()
+    const TypingKeys10 = useRef()
+    const TypingKeys11 = useRef()
+    const TypingKeys12 = useRef()
+    const TypingKeys13 = useRef()
+    const TypingKeys14 = useRef()
+    const TypingKeys15 = useRef()
+    const TypingKeys16 = useRef()
+    const TypingKeys17 = useRef()
+    const TypingKeys18 = useRef()
+    const TypingKeys19 = useRef()
+    const TypingKeys20 = useRef()
+    const TypingKeys21 = useRef()
+    const TypingKeys22 = useRef()
+    const TypingKeys23 = useRef()
+    const TypingKeys24 = useRef()
+    const TypingKeys25 = useRef()
+    const TypingKeys26 = useRef()
+    const TypingKeys27 = useRef()
+
+    const ArrayOfTypingKeys = [
+        [TypingKeys1, TypingKeys2, TypingKeys3, TypingKeys4, TypingKeys5, TypingKeys6, TypingKeys7, TypingKeys8, TypingKeys9, TypingKeys10],
+        [TypingKeys11, TypingKeys12, TypingKeys13, TypingKeys14, TypingKeys15, TypingKeys16, TypingKeys17, TypingKeys18, TypingKeys19, TypingKeys20],
+        [TypingKeys21, TypingKeys22, TypingKeys23, TypingKeys24, TypingKeys25, TypingKeys26, TypingKeys27]
+    ]
 
     const ArrayOfColumns = [ column1, column2, column3, column4, column5, column6, column7, column8, column9, column10, column11, column12, column13, column14, column15, column16, column17, column18, column19, column20, column21, column22, column23, column24, column25, column26, column27, column28, column29, column30]
     window.onkeydown = (e)=>{DefineTiles(e)}
-    const KeyType = (e) => {DefineTiles(e); console.log(e)}
+    const KeyType = (e) => {DefineTiles(e)}
+
     function Start(){
         setGameState(true)
         if(!gameState){
             setRow(1)
             setTiles(0)
             setScore(0)
-            setAnswer(wordList[Math.floor(Math.random() * Math.floor(Math.random() * (wordList.length - 1)) )].toUpperCase())
+            // setAnswer(wordList[Math.floor(Math.random() * Math.floor(Math.random() * (wordList.length - 1)) )].toUpperCase())
         } 
     }
-
-    useEffect(()=>{console.log(answer, row)},[answer, row])
 
     function DefineTiles(e){
         const letters = [
@@ -81,7 +116,6 @@ function Container(){
         let key
         e.key != null ? key = e.key : key = e
 
-        console.log(key)
         for(let i = 0; i < letters.length; i++){
             if(row == 1){
                 if((key == letters[i]) && tile != 5){
@@ -148,100 +182,144 @@ function Container(){
         
     }
 
-    window.addEventListener("keydown", (e)=>CheckAnswer(e))
+    window.addEventListener("keyup", (e)=>CheckAnswer(e))
     function CheckAnswer(e){
         let Guess = ""
         if(e.key === "Enter" || e == "Enter"){
-            if(row === 1 && tile === 5){
+            if(row === 1 && defineRow == row && tile === 5){
                 for(let i = tile-5; i < tile; i++){
                     if(ArrayOfColumns[i].current != null){Guess += ArrayOfColumns[i].current.textContent}
                     Guess.toString()
                 }
-                setGuess(Guess)
+                CheckGuess()
+                
             } else if(row === 2 && tile === 10){
                 for(let i = tile-5; i < tile; i++){
                     if(ArrayOfColumns[i].current != null){Guess += ArrayOfColumns[i].current.textContent}
                     Guess.toString()
                 }
-                setGuess(Guess)
+                
+                CheckGuess()
             } else if(row === 3 && tile === 15){
                 for(let i = tile-5; i < tile; i++){
                     if(ArrayOfColumns[i].current != null){Guess += ArrayOfColumns[i].current.textContent}
                     Guess.toString()
                 }
-                setGuess(Guess)
+                CheckGuess()
+                
             } else if(row === 4 && tile === 20){
                 for(let i = tile-5; i < tile; i++){
                     if(ArrayOfColumns[i].current != null){Guess += ArrayOfColumns[i].current.textContent}
                     Guess.toString()
                 }
-                setGuess(Guess)
+                CheckGuess()
+                
             } else if(row === 5 && tile === 25){
                 for(let i = tile-5; i < tile; i++){
                     if(ArrayOfColumns[i].current != null){Guess += ArrayOfColumns[i].current.textContent}
                     Guess.toString()
                 }
-                setGuess(Guess)
+                CheckGuess()
+                
             } else if(row === 6 && tile === 30){
                 for(let i = tile-5; i < tile; i++){
                     if(ArrayOfColumns[i].current != null){Guess += ArrayOfColumns[i].current.textContent}
                     Guess.toString()
                 }
-                setGuess(Guess)
+                CheckGuess()
+                
             }
 
-            if(row != 7){setRow(row + 1)}
-            CheckGuess()
+            setGuess(Guess)
         }
 
-
         function CheckGuess(){
-            let indexTile = tile - 5
-            let indexAns = 0
-            if(Guess.length == 5){
+            console.log(Guess)
+            if(Guess.length == 5 && Guess.length != 0){
 
-                if(Guess == answer){
+                if(Guess.toUpperCase() == answer.toUpperCase()){
                     for(let j = tile-5; j < tile; j++){
-                        ArrayOfColumns[j].current.classList.add("flipGreen")
-                    }
+                        if(ArrayOfColumns[j].current.classList.contains("flipYellow") || ArrayOfColumns[j].current.classList.contains("flipGray")){
+                            ArrayOfColumns[j].current.classList.remove("flipGray", "flipYellow")
+                            ArrayOfColumns[j].current.classList.add("flipGreen")
+                            ChangeTypingKeyColor()
+                        } else {
+                            ArrayOfColumns[j].current.classList.add("flipGreen")
+                            ChangeTypingKeyColor()
+                        }
 
-                } else if (Guess != answer){
-                    for(var j = tile - 5; j < tile; j++){
-                        
-                        for(let i = 0; i < 5; i++){
-                            if(answer[indexAns] == ArrayOfColumns[indexTile].current.textContent && answer[i] == Guess[i]){
-                                if(ArrayOfColumns[indexTile].current.classList.contains("flipGray")){
-                                    ArrayOfColumns[indexTile].current.classList.replace("flipGray", "flipGreen")
-                                } else {
-                                    ArrayOfColumns[indexTile].current.classList.add("flipGreen")
+                        function ChangeTypingKeyColor(){
+                            for(let row = 0; row < ArrayOfTypingKeys.length; row++){
+                                for(let each = 0; each < ArrayOfTypingKeys[row].length; each++){
+                                    if(ArrayOfColumns[j].current.textContent == ArrayOfTypingKeys[row][each].current.textContent.toUpperCase()){
+                                        ArrayOfTypingKeys[row][each].current.style.backgroundColor = "green"
+                                    } 
                                 }
-                                redo()
+                            }
+                        }
+                    }
+                } else if (Guess.toUpperCase() != answer.toUpperCase()){
+                    for(var j = tile - 5; j < tile; j++){
+                        for(let i = 0; i < 5; i++){
+                            
+                            if(answer[(j+5)-tile] === ArrayOfColumns[j].current.textContent ){
+                                
+                                if(ArrayOfColumns[j].current.classList.contains("flipGray")){
+                                    ArrayOfColumns[j].current.classList.replace("flipGray", "flipGreen")
+                                } else {
+                                    ArrayOfColumns[j].current.classList.add("flipGreen")
+                                }
+
+                                for(let row = 0; row < ArrayOfTypingKeys.length; row++){
+                                    for(let each = 0; each < ArrayOfTypingKeys[row].length; each++){
+                                        if(ArrayOfColumns[j].current.textContent == ArrayOfTypingKeys[row][each].current.textContent.toUpperCase()){
+                                            ArrayOfTypingKeys[row][each].current.style.backgroundColor = "green"
+                                            break
+                                        } 
+                                    }
+                                }
+                                
                                 break
-                            } else if(ArrayOfColumns[j].current.textContent == answer[i]){
+                                
+                            } 
+                            
+                            else if(ArrayOfColumns[j].current.textContent == answer[i]){
                                 
                                 if(ArrayOfColumns[j].current.classList.contains("flipGray")){
                                     ArrayOfColumns[j].current.classList.replace("flipGray", "flipYellow")
                                 } else {
                                     ArrayOfColumns[j].current.classList.add("flipYellow")
                                 }
-                                redo()
+
+                                for(let row = 0; row < ArrayOfTypingKeys.length; row++){
+                                    for(let each = 0; each < ArrayOfTypingKeys[row].length; each++){
+                                        if((ArrayOfColumns[j].current.textContent == ArrayOfTypingKeys[row][each].current.textContent.toUpperCase()) && (ArrayOfTypingKeys[row][each].current.style.backgroundColor !== "green")){
+                                            console.log(ArrayOfTypingKeys[row][each].current)
+                                            ArrayOfTypingKeys[row][each].current.style.backgroundColor = "yellow"
+                                            break
+                                        } 
+                                    }
+                                }
                                 break
-                            } else {
+                            } 
+                            else {
                                 ArrayOfColumns[j].current.classList.add("flipGray")
+                                for(let row = 0; row < ArrayOfTypingKeys.length; row++){
+                                    for(let each = 0; each < ArrayOfTypingKeys[row].length; each++){
+                                        if(ArrayOfColumns[j].current.textContent == ArrayOfTypingKeys[row][each].current.textContent.toUpperCase() && ArrayOfTypingKeys[row][each].current.style.backgroundColor != "green"){
+                                            ArrayOfTypingKeys[row][each].current.style.backgroundColor = "gray"
+                                        } 
+                                    }
+                                }
+
                             }
-
-
-                            function redo(){indexTile = tile - 5}
-                            if(indexTile != tile - 1){indexTile++}else{indexTile = tile - 5}
-                            
                         }
-                        if(indexAns != 4){indexAns++}
                     }
                 }
-
-                
                 GameUpdate(Guess)
             }
+
+            Guess = ""
         }
     }
 
@@ -267,50 +345,85 @@ function Container(){
                     setScore(1)
                     break;
             } 
-            clearBoard()
-            setRow(1)
             setTiles(0)
-        } else if(string != answer && row == 7) {
-            window.alert("The Answer is: " + answer)
+            setRow(1)
+            clearBoard()
+            setAnswer(wordList[Math.floor(Math.random() * Math.floor(Math.random() * (wordList.length - 1)) )].toUpperCase())
+        } else if(string != answer && row < 6){
+            setRow(row+1)
+        } else if(string != answer && row == 6) {
             setGameState(false)
             clearBoard()
+            setTimeout(() => {
+                setShowAnswer(true)
+            }, 1000);
         }
 
         function clearBoard(){
+
             setTimeout(() => {
                 for(let i=0; i<ArrayOfColumns.length; i++){
-                    if(ArrayOfColumns[i].current.classList.contains("highlightColumn")){
-                        if(ArrayOfColumns[i].current.classList.contains("flipGreen")){
-                            ArrayOfColumns[i].current.classList.remove("flipGreen")
-                        } else if(ArrayOfColumns[i].current.classList.contains("flipYellow")){
-                            ArrayOfColumns[i].current.classList.remove("flipYellow")
-                        } else if(ArrayOfColumns[i].current.classList.contains("flipGray")){
-                            ArrayOfColumns[i].current.classList.remove("flipGray")
-                        }
-                        ArrayOfColumns[i].current.classList.add("Unhighlight")
+                    if(ArrayOfColumns[i].current.classList.contains("highlightColumn") ){
                         ArrayOfColumns[i].current.classList.remove("highlightColumn")
+                        ArrayOfColumns[i].current.classList.add("Unhighlight")
                         ArrayOfColumns[i].current.textContent = ""
-                        setTimeout(() => {
-                            ArrayOfColumns[i].current.classList.remove("Unhighlight")
-                        }, 1000);
                     } 
-                    
+
+                    if(ArrayOfColumns[i].current.classList.contains("flipGreen")){
+                        ArrayOfColumns[i].current.classList.remove("flipGreen")
+                    }
+                    if(ArrayOfColumns[i].current.classList.contains("flipYellow")){
+                        ArrayOfColumns[i].current.classList.remove("flipYellow")
+                    }
+                    if(ArrayOfColumns[i].current.classList.contains("flipGray")){
+                        ArrayOfColumns[i].current.classList.remove("flipGray")
+                    }
                 }
-            }, 1000);
-            
+
+                for(let row = 0; row < ArrayOfTypingKeys.length; row++){
+
+                    for(let each = 0; each < ArrayOfTypingKeys[row].length; each++){
+                        if(ArrayOfTypingKeys[row][each].current.style.backgroundColor != "#99949473"){
+                            ArrayOfTypingKeys[row][each].current.style.backgroundColor = "#99949473"
+                        }
+                    }
+                }
+                
+
+                setTimeout(() => {
+                    for(let i=0; i<ArrayOfColumns.length; i++){
+                        if(ArrayOfColumns[i].current.classList.contains("Unhighlight")){
+                            ArrayOfColumns[i].current.classList.remove("Unhighlight")
+                            
+                        } 
+                    }
+                }, 500);
+            }, 3000);
+                    
         }
+
     }
+
+    function Hint(){
+        
+    }
+
+
+    useEffect(()=>{
+       console.log(answer)
+        
+    },[answer])
 
     return(
         <>
-            <div className={!gameState ? "Wrapper" : "HideWrapper"}>
-                <button className="StartButton" ref={StartButton} onClick={()=>Start()}>
+            <div className={!started ? "Wrapper" : "HideWrapper"}>
+                <button className="StartButton" ref={StartButton} onClick={()=>{Start(); setStarted(true)}}>
                     Start
                 </button>
             </div>  
 
             <div className="Container">
-            <h1>WORDLE</h1>
+            <h1>Wordle</h1>
             <div className="row row1" ref={row1}>
                 <div className={"column"} ref={column1}></div>
                 <div className={"column"} ref={column2}></div>
@@ -359,21 +472,39 @@ function Container(){
         
         <div className="Keyboard_Wrapper">
             <div className="Row-Keys">
-                {Keys[0].map(key=>(
-                    <li key={key} onClick={()=>KeyType(key)}>{key}</li>
+                {Keys[0].map((key, i)=>(
+                    <li key={key} ref={ArrayOfTypingKeys[0][i]} onClick={()=>KeyType(key)}>
+                        {key}
+                    </li>
                 ))}
             </div>
             <div className="Row-Keys">
-                {Keys[1].map(key=>(
-                    <li key={key} onClick={()=>KeyType(key)}>{key}</li>
+                {Keys[1].map((key, i)=>(
+                    <li key={key} onClick={()=>KeyType(key)} ref={ArrayOfTypingKeys[1][i]}>
+                        {key}
+                    </li>
                 ))}
             </div>
             <div className="Row-Keys">
-                {Keys[2].map(key=>(
-                    <li key={key} onClick={()=>KeyType(key)}>{key}</li>
+                {Keys[2].map((key, i)=>(
+                    <li key={key} onClick={()=>KeyType(key)} ref={ArrayOfTypingKeys[2][i]}>
+                        {key}
+                    </li>
                 ))}
-                <li onClick={()=>CheckAnswer("Enter")}>Enter</li>
+                <li onClick={()=>CheckAnswer("Enter")} id="Enter">Enter</li>
             </div>
+        </div>
+
+        <div className={ showAnswer ? "ShowAnswer" : "UnshowAnswer"}>
+            <h1>You Lose!</h1>
+            <p className="Answer">The Word Is: {answer}</p>
+            <div className="Scores">
+                <h1 className="Score">High Score: 0</h1>
+                <h1 className="Score">Your Score: {score}</h1>
+            </div>
+            <button className="TryAgain" onClick={()=>{Start(); setShowAnswer(false)}}>
+                Try Again
+            </button>
         </div>
         </>
 

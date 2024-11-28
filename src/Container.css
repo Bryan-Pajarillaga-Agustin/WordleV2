@@ -4,7 +4,15 @@
 }
 body {
     overflow-x: hidden;
-    overflow-y: hidden;
+}
+button{
+    transition: .15s all linear;
+}
+button:hover{
+    opacity: .6;
+}
+button:active{
+    opacity: .9;
 }
 #root{
     width: 100vw;
@@ -20,7 +28,6 @@ body {
     align-items: center;
     justify-content: end;
     flex-direction: column;
-    margin-top: 2rem;
     padding: 1rem;
 }
 .Container > h1 {
@@ -33,14 +40,14 @@ body {
 }
 .Container .row{
     width: 90%;
-    height: 50px;
+    height: 60px;
     margin-top: .5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 .Container .row .column {
-    width: 50px;
+    width: 57px;
     height: 100%;
     border: 2px solid white;
     background-color: #49464673;
@@ -150,6 +157,45 @@ body {
     color: rgb(0, 0, 0);
 }
 
+
+.Keyboard_Wrapper{
+    width: 600px;
+    height: 300px;
+    margin: auto;
+    display: block;
+}
+.Keyboard_Wrapper .Row-Keys{
+    display: flex;
+    width: 600px;
+    justify-content: center;
+}
+.Row-Keys > li{
+    background-color: #99949473;
+    border: 2.3px solid black;
+    border-radius: .5rem;
+    list-style: none;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    text-transform: uppercase;
+    width: 5rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2px 2px;
+    transition: .15s all linear;
+}
+#Enter{
+    width: 6.5rem;
+}
+.Row-Keys > li:hover{
+    opacity: .5;
+}
+.Row-Keys > li:active{
+    opacity: .9;
+}
+
 @media (max-width: 500px) and (max-height: 750px){
     .Container {
         width: 300px;
@@ -187,21 +233,96 @@ body {
     }
     .Keyboard_Wrapper .Row-Keys{
         display: flex;
-        justify-content: space-between;
         width: 400px;
+        justify-content: center;
     }
     .Row-Keys > li{
         background-color: #99949473;
         border: 2px solid black;
         border-radius: 5px;
         list-style: none;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-family: "Ubuntu", sans-serif;
+        font-weight: 400;
+        font-style: normal;
         text-transform: uppercase;
-        font-size: 1.5rem;
-        width: 100%;
+        width: 2rem;
         height: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
     }
+    #Enter{
+        width: 6.5rem;
+    }
 } 
+
+.UnshowAnswer{
+    opacity: 0;
+    display: none;
+}
+
+.ShowAnswer{
+    opacity: 1;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+    border-radius: 3rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    position: absolute;
+    top: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #d1d6cf;
+    z-index: 3;
+    padding: 2rem;
+    justify-content: space-around;
+    border: 1rem groove black;
+    filter: drop-shadow(0 0 .2rem green);
+}
+
+.ShowAnswer > h1,
+.UnshowAnswer > h1 {
+    font-weight: 900;
+    font-size: 3rem;
+    margin: 1rem;
+}   
+
+
+
+.ShowAnswer .Scores,
+.UnshowAnswer .Scores{
+    display: flex;
+    font-size: .76rem;
+    gap: 3rem;
+}
+
+.ShowAnswer .Scores > h1,
+.UnshowAnswer .Scores > h1 {
+    color: #356118;
+}
+
+.TryAgain {
+    font-weight: 500;
+    padding: 1rem;
+    color: #d0d8cf;
+    border: .24rem solid rgb(255, 255, 255);
+    font-weight: 1000;
+    background-color: rgb(67, 121, 13);
+    filter: drop-shadow(0 0 .2rem black);
+    cursor: pointer;
+    transition: all .15s linear;
+}
+
+.TryAgain:hover{
+    background-color: white;
+    border: .24rem solid green;
+    color: green;
+}
+
+.Answer{
+    font-weight: 800;
+    font-size: 1.2rem;
+}
