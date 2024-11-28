@@ -5,11 +5,13 @@ function Container(){
     const [defineRow, setDefineRow] = useState(1)
     const [tile, setTiles] = useState(null)
     const [gameState, setGameState] = useState(false)
-    const [answer, setAnswer] = useState("VIVID")
+    const [answer, setAnswer] = useState("")
     const [guess, setGuess] = useState("")
     const [score, setScore] = useState(null)
     const [showAnswer, setShowAnswer] = useState(null)
     const [started, setStarted] = useState(false)
+    const [gold, setGold] = useState(0)
+    const [guessedWordsStorage, setGuessedWordsStorage] = useState([])
 
     const SubmitButton = useRef(null)
     const StartButton = useRef(null)
@@ -104,7 +106,7 @@ function Container(){
             setRow(1)
             setTiles(0)
             setScore(0)
-            // setAnswer(wordList[Math.floor(Math.random() * Math.floor(Math.random() * (wordList.length - 1)) )].toUpperCase())
+            setAnswer(wordList[Math.floor(Math.random() * Math.floor(Math.random() * (wordList.length - 1)) )].toUpperCase())
         } 
     }
 
@@ -404,15 +406,29 @@ function Container(){
 
     }
 
-    function Hint(){
+    function SetGuessedWords(){
+        for(const keys in guessedWordsStorage){
+            if(guessedWordsStorage[keys] == answer){
+                break
+            }
+
+            if(keys == guessedWordsStorage.length){
+                setGuessedWordsStorage(guessedWordsStorage += answer.toUpperCase())
+            }
+        }
         
     }
 
+    function Hint(){
+
+    }
 
     useEffect(()=>{
-       console.log(answer)
-        
-    },[answer])
+        let GoldFromStorage = JSON.parse(localStorage.getItem("goldStorage"))
+        if(GoldFromStorage != null){
+            setGold(GoldFromStorage)
+        }
+    },[])
 
     return(
         <>
@@ -422,90 +438,101 @@ function Container(){
                 </button>
             </div>  
 
+            <div className="GameContents">
+                <div className="leftContents">
+                    <button className="GuessedWords">Guessed Words</button>
+                    <h1>Gold: {gold} <div className="goldIconWrapper"><div className="gold gold1"></div><div className="gold gold2"></div></div></h1>
+                </div>
+                <div className="middleContents">
+
+                </div>
+                <div className="rightContents"></div>
+            </div>
+
             <div className="Container">
-            <h1>Wordle</h1>
-            <div className="row row1" ref={row1}>
-                <div className={"column"} ref={column1}></div>
-                <div className={"column"} ref={column2}></div>
-                <div className={"column"} ref={column3}></div>
-                <div className={"column"} ref={column4}></div>
-                <div className={"column"} ref={column5}></div>
-            </div>
-            <div className="row row1" ref={row2}>
-                <div className={"column"} ref={column6}></div>
-                <div className={"column"} ref={column7}></div>
-                <div className={"column"} ref={column8}></div>
-                <div className={"column"} ref={column9}></div>
-                <div className={"column"} ref={column10}></div>
-            </div>
-            <div className="row row1" ref={row3}>
-                <div className={"column"} ref={column11}></div>
-                <div className={"column"} ref={column12}></div>
-                <div className={"column"} ref={column13}></div>
-                <div className={"column"} ref={column14}></div>
-                <div className={"column"} ref={column15}></div>
-            </div>
-            <div className="row row1" ref={row4}>
-                <div className={"column"} ref={column16}></div>
-                <div className={"column"} ref={column17}></div>
-                <div className={"column"} ref={column18}></div>
-                <div className={"column"} ref={column19}></div>
-                <div className={"column"} ref={column20}></div>
-            </div>
-            <div className="row row1" ref={row5}>
-                <div className={"column"} ref={column21}></div>
-                <div className={"column"} ref={column22}></div>
-                <div className={"column"} ref={column23}></div>
-                <div className={"column"} ref={column24}></div>
-                <div className={"column"} ref={column25}></div>
-            </div>
-            <div className="row row1" ref={row6}>
-                <div className={"column"} ref={column26}></div>
-                <div className={"column"} ref={column27}></div>
-                <div className={"column"} ref={column28}></div>
-                <div className={"column"} ref={column29}></div>
-                <div className={"column"} ref={column30}></div>
+                <h1>Wordle</h1>
+                <div className="row row1" ref={row1}>
+                    <div className={"column"} ref={column1}></div>
+                    <div className={"column"} ref={column2}></div>
+                    <div className={"column"} ref={column3}></div>
+                    <div className={"column"} ref={column4}></div>
+                    <div className={"column"} ref={column5}></div>
+                </div>
+                <div className="row row1" ref={row2}>
+                    <div className={"column"} ref={column6}></div>
+                    <div className={"column"} ref={column7}></div>
+                    <div className={"column"} ref={column8}></div>
+                    <div className={"column"} ref={column9}></div>
+                    <div className={"column"} ref={column10}></div>
+                </div>
+                <div className="row row1" ref={row3}>
+                    <div className={"column"} ref={column11}></div>
+                    <div className={"column"} ref={column12}></div>
+                    <div className={"column"} ref={column13}></div>
+                    <div className={"column"} ref={column14}></div>
+                    <div className={"column"} ref={column15}></div>
+                </div>
+                <div className="row row1" ref={row4}>
+                    <div className={"column"} ref={column16}></div>
+                    <div className={"column"} ref={column17}></div>
+                    <div className={"column"} ref={column18}></div>
+                    <div className={"column"} ref={column19}></div>
+                    <div className={"column"} ref={column20}></div>
+                </div>
+                <div className="row row1" ref={row5}>
+                    <div className={"column"} ref={column21}></div>
+                    <div className={"column"} ref={column22}></div>
+                    <div className={"column"} ref={column23}></div>
+                    <div className={"column"} ref={column24}></div>
+                    <div className={"column"} ref={column25}></div>
+                </div>
+                <div className="row row1" ref={row6}>
+                    <div className={"column"} ref={column26}></div>
+                    <div className={"column"} ref={column27}></div>
+                    <div className={"column"} ref={column28}></div>
+                    <div className={"column"} ref={column29}></div>
+                    <div className={"column"} ref={column30}></div>
+                </div>
+
+                <button className="Submit" ref={SubmitButton} onClick={()=>CheckAnswer("Enter")}>Submit</button>
             </div>
 
-            <button className="Submit" ref={SubmitButton} onClick={()=>CheckAnswer("Enter")}>Submit</button>
-        </div>
-        
-        <div className="Keyboard_Wrapper">
-            <div className="Row-Keys">
-                {Keys[0].map((key, i)=>(
-                    <li key={key} ref={ArrayOfTypingKeys[0][i]} onClick={()=>KeyType(key)}>
-                        {key}
-                    </li>
-                ))}
+            <div className="Keyboard_Wrapper">
+                <div className="Row-Keys">
+                    {Keys[0].map((key, i)=>(
+                        <li key={key} ref={ArrayOfTypingKeys[0][i]} onClick={()=>KeyType(key)}>
+                            {key}
+                        </li>
+                    ))}
+                </div>
+                <div className="Row-Keys">
+                    {Keys[1].map((key, i)=>(
+                        <li key={key} onClick={()=>KeyType(key)} ref={ArrayOfTypingKeys[1][i]}>
+                            {key}
+                        </li>
+                    ))}
+                </div>
+                <div className="Row-Keys">
+                    {Keys[2].map((key, i)=>(
+                        <li key={key} onClick={()=>KeyType(key)} ref={ArrayOfTypingKeys[2][i]}>
+                            {key}
+                        </li>
+                    ))}
+                    <li onClick={()=>CheckAnswer("Enter")} id="Enter">Enter</li>
+                </div>
             </div>
-            <div className="Row-Keys">
-                {Keys[1].map((key, i)=>(
-                    <li key={key} onClick={()=>KeyType(key)} ref={ArrayOfTypingKeys[1][i]}>
-                        {key}
-                    </li>
-                ))}
-            </div>
-            <div className="Row-Keys">
-                {Keys[2].map((key, i)=>(
-                    <li key={key} onClick={()=>KeyType(key)} ref={ArrayOfTypingKeys[2][i]}>
-                        {key}
-                    </li>
-                ))}
-                <li onClick={()=>CheckAnswer("Enter")} id="Enter">Enter</li>
-            </div>
-        </div>
 
-        <div className={ showAnswer ? "ShowAnswer" : "UnshowAnswer"}>
-            <h1>You Lose!</h1>
-            <p className="Answer">The Word Is: {answer}</p>
-            <div className="Scores">
-                <h1 className="Score">High Score: 0</h1>
-                <h1 className="Score">Your Score: {score}</h1>
+            <div className={ showAnswer ? "ShowAnswer" : "UnshowAnswer"}>
+                <h1>You Lose!</h1>
+                <p className="Answer">The Word Is: {answer}</p>
+                <div className="Scores">
+                    <h1 className="Score">High Score: 0</h1>
+                    <h1 className="Score">Your Score: {score}</h1>
+                </div>
+                <button className="TryAgain" onClick={()=>{Start(); setShowAnswer(false)}}>
+                    Try Again
+                </button>
             </div>
-            <button className="TryAgain" onClick={()=>{Start(); setShowAnswer(false)}}>
-                Try Again
-            </button>
-        </div>
         </>
 
         
