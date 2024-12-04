@@ -1,5 +1,7 @@
-import { useEffect, useRef, useState } from "react"
+import { cloneElement, memo, useEffect, useRef, useState } from "react"
 import "../src/Container.css"
+import "../src/TopContents.css"
+import "../src/WordCollections.css"
 function Container(){
     const [row, setRow] = useState(null)
     const [defineRow, setDefineRow] = useState(1)
@@ -11,7 +13,8 @@ function Container(){
     const [showAnswer, setShowAnswer] = useState(null)
     const [started, setStarted] = useState(false)
     const [gold, setGold] = useState(0)
-    const [guessedWordsStorage, setGuessedWordsStorage] = useState([])
+    const [showCollections, setShowCollection]= useState(false)
+    const [collections, setCollections] = useState([])
 
     const SubmitButton = useRef(null)
     const StartButton = useRef(null)
@@ -97,7 +100,7 @@ function Container(){
     ]
 
     const ArrayOfColumns = [ column1, column2, column3, column4, column5, column6, column7, column8, column9, column10, column11, column12, column13, column14, column15, column16, column17, column18, column19, column20, column21, column22, column23, column24, column25, column26, column27, column28, column29, column30]
-    window.onkeydown = (e)=>{DefineTiles(e)}
+    window.onkeydown = (e)=>{ if(gameState){DefineTiles(e)}}
     const KeyType = (e) => {DefineTiles(e)}
 
     function Start(){
@@ -329,27 +332,29 @@ function Container(){
         if(string == answer){
             switch(row){
                 case 1:
-                    setScore(6)
+                    setScore(score + 6)
                     break;
                 case 2:
-                    setScore(5)
+                    setScore(score + 5)
                     break;
                 case 3:
-                    setScore(4)
+                    setScore(score + 4)
                     break;
                 case 4:
-                    setScore(3)
+                    setScore(score + 3)
                     break;
                 case 5:
-                    setScore(2)
+                    setScore(score + 2)
                     break;
                 case 6:
-                    setScore(1)
+                    setScore(score + 1)
                     break;
             } 
             setTiles(0)
             setRow(1)
+            SetGuessedWords()
             clearBoard()
+            setGameState(false)
             setAnswer(wordList[Math.floor(Math.random() * Math.floor(Math.random() * (wordList.length - 1)) )].toUpperCase())
         } else if(string != answer && row < 6){
             setRow(row+1)
@@ -399,6 +404,7 @@ function Container(){
                             
                         } 
                     }
+                    setGameState(true)
                 }, 500);
             }, 3000);
                     
@@ -407,28 +413,40 @@ function Container(){
     }
 
     function SetGuessedWords(){
-        for(const keys in guessedWordsStorage){
-            if(guessedWordsStorage[keys] == answer){
-                break
-            }
+        if(collections.length != 0){
+            for(let i = 0; i <= collections.length; i++){
+                if(collections[i] == answer && i < collections.length){
+                    break;
+                }
 
-            if(keys == guessedWordsStorage.length){
-                setGuessedWordsStorage(guessedWordsStorage += answer.toUpperCase())
+                if(i == collections.length){
+                    setCollections([...collections, answer])
+                    break
+                }
             }
+        } else if(collections.length == 0) {
+            setCollections([answer])
         }
-        
     }
 
     function Hint(){
 
     }
+    useEffect(()=>{
+        let CollectedWordsFromStorage
+        console.log(answer, collections)
+        if(collections != [] && collections != null){CollectedWordsFromStorage = JSON.parse(localStorage.getItem("CollectedWords"))}
+        
+        if(CollectedWordsFromStorage != null && CollectedWordsFromStorage.length != 0) {
+            setCollections(CollectedWordsFromStorage)
+            console.log(CollectedWordsFromStorage)
+        }
+    },[answer])
 
     useEffect(()=>{
-        let GoldFromStorage = JSON.parse(localStorage.getItem("goldStorage"))
-        if(GoldFromStorage != null){
-            setGold(GoldFromStorage)
-        }
-    },[])
+        localStorage.setItem("goldStorage", gold)
+        localStorage.setItem("CollectedWords", JSON.stringify(collections))
+    },[collections])
 
     return(
         <>
@@ -440,16 +458,18 @@ function Container(){
 
             <div className="GameContents">
                 <div className="leftContents">
-                    <button className="GuessedWords">Guessed Words</button>
-                    <h1>Gold: {gold} <div className="goldIconWrapper"><div className="gold gold1"></div><div className="gold gold2"></div></div></h1>
+                    <button className="GuessedWords" onClick={()=>setShowCollection(true)}>Collection</button>
+                    <h3>Gold: {gold} <div className="goldIconWrapper"><div className="gold gold1"></div><div className="gold gold2"></div></div></h3>
                 </div>
                 <div className="middleContents">
-
+                    <h2 id="Score">Score: {score}</h2>
                 </div>
-                <div className="rightContents"></div>
+                <div className="rightContents">
+                    <button className="HintButton">Hint</button>
+                </div>
             </div>
 
-            <div className="Container">
+            <div className={ started ? "Container" : "HideContainer"}>
                 <h1>Wordle</h1>
                 <div className="row row1" ref={row1}>
                     <div className={"column"} ref={column1}></div>
@@ -532,6 +552,17 @@ function Container(){
                 <button className="TryAgain" onClick={()=>{Start(); setShowAnswer(false)}}>
                     Try Again
                 </button>
+            </div>
+
+            <div className={showCollections ? "Collections" : "HideCollections"}>
+                <button className="unShowCollection" onClick={()=>setShowCollection(false)}>X</button>
+                <h1>Collections</h1>
+                <div className="Wrapper-Words">
+                   <ul>
+                        {collections.length != 0 ? collections.map((ea)=><li key={ea}>{ea}</li>) : console.log("error")}
+                   </ul> 
+                </div>
+                
             </div>
         </>
 

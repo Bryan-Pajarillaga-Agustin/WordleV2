@@ -8,6 +8,7 @@ body {
 }
 button{
     transition: .15s all linear;
+    cursor : pointer;
 }
 button:hover{
     opacity: .6;
@@ -18,6 +19,9 @@ button:active{
 #root{
     width: 100vw;
     height: 100vh;
+}
+.HideContainer{
+    display: none;
 }
 .Container {
     width: 350px;
@@ -127,6 +131,7 @@ button:active{
     width: 100vw;
     height: 100vh;
     background: linear-gradient(to top, orange, rgb(221, 185, 118), orange);
+    z-index: 1;
 }
 .HideWrapper, .HideWrapper .StartButton {
     display: none;
@@ -154,52 +159,6 @@ button:active{
 .StartButton:hover{
     background-color: green;
     color: rgb(0, 0, 0);
-}
-
-.GameContents{
-    display: flex;
-    width: 100vw;
-    height: fit-content;
-    font-family: "Ubuntu", sans-serif;
-    font-weight: 700;
-    display: flex;
-}
-.leftContents{
-
-}
-.leftContents > h1{
-    color: #aa330ed8;
-    display: flex;
-    align-items: center;
-}
-.leftContents > h1 > .goldIconWrapper{
-    position: relative;
-    align-items: center;
-    justify-content: center;
-}
-.leftContents > h1 > .goldIconWrapper > .gold{
-    width: 25px;
-    height: 25px;
-    background-color: rgb(255, 255, 25);
-    border-radius: 50%;
-    margin-left: .5rem;
-    z-index: -1;
-    color: green;
-
-    
-}
-.leftContents > h1 > .goldIconWrapper > .gold:nth-of-type(2){
-    position: absolute;
-    background-color: rgb(155, 155, 19);
-    top: .5rem;
-    z-index: -2;
-}
-
-.rightContents{
-
-}
-.middleContents{
-
 }
 
 .Keyboard_Wrapper{
