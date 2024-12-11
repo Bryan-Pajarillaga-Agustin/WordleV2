@@ -197,6 +197,7 @@ function Container(){
                     Guess.toString()
                 }
                 CheckGuess()
+                setGuess(Guess)
                 
             } else if(row === 2 && tile === 10){
                 for(let i = tile-5; i < tile; i++){
@@ -205,12 +206,14 @@ function Container(){
                 }
                 
                 CheckGuess()
+                setGuess(Guess)
             } else if(row === 3 && tile === 15){
                 for(let i = tile-5; i < tile; i++){
                     if(ArrayOfColumns[i].current != null){Guess += ArrayOfColumns[i].current.textContent}
                     Guess.toString()
                 }
                 CheckGuess()
+                setGuess(Guess)
                 
             } else if(row === 4 && tile === 20){
                 for(let i = tile-5; i < tile; i++){
@@ -218,6 +221,7 @@ function Container(){
                     Guess.toString()
                 }
                 CheckGuess()
+                setGuess(Guess)
                 
             } else if(row === 5 && tile === 25){
                 for(let i = tile-5; i < tile; i++){
@@ -225,6 +229,7 @@ function Container(){
                     Guess.toString()
                 }
                 CheckGuess()
+                setGuess(Guess)
                 
             } else if(row === 6 && tile === 30){
                 for(let i = tile-5; i < tile; i++){
@@ -232,17 +237,17 @@ function Container(){
                     Guess.toString()
                 }
                 CheckGuess()
+                setGuess(Guess)
                 
             }
 
-            setGuess(Guess)
         }
 
         function CheckGuess(){
-            console.log(Guess)
             if(Guess.length == 5 && Guess.length != 0){
 
                 if(Guess.toUpperCase() == answer.toUpperCase()){
+                    console.log(answer == Guess, console.log(answer, Guess))
                     for(let j = tile-5; j < tile; j++){
                         if(ArrayOfColumns[j].current.classList.contains("flipYellow") || ArrayOfColumns[j].current.classList.contains("flipGray")){
                             ArrayOfColumns[j].current.classList.remove("flipGray", "flipYellow")
@@ -299,7 +304,6 @@ function Container(){
                                 for(let row = 0; row < ArrayOfTypingKeys.length; row++){
                                     for(let each = 0; each < ArrayOfTypingKeys[row].length; each++){
                                         if((ArrayOfColumns[j].current.textContent == ArrayOfTypingKeys[row][each].current.textContent.toUpperCase()) && (ArrayOfTypingKeys[row][each].current.style.backgroundColor !== "green")){
-                                            console.log(ArrayOfTypingKeys[row][each].current)
                                             ArrayOfTypingKeys[row][each].current.style.backgroundColor = "yellow"
                                             break
                                         } 
@@ -329,6 +333,7 @@ function Container(){
     }
 
     function GameUpdate(string){
+        console.log(string)
         if(string == answer){
             switch(row){
                 case 1:
@@ -353,9 +358,10 @@ function Container(){
             setTiles(0)
             setRow(1)
             SetGuessedWords()
+            setAnswer(wordList[Math.floor(Math.random() * Math.floor(Math.random() * (wordList.length - 1)) )].toUpperCase())
             clearBoard()
             setGameState(false)
-            setAnswer(wordList[Math.floor(Math.random() * Math.floor(Math.random() * (wordList.length - 1)) )].toUpperCase())
+            
         } else if(string != answer && row < 6){
             setRow(row+1)
         } else if(string != answer && row == 6) {
@@ -434,12 +440,10 @@ function Container(){
     }
     useEffect(()=>{
         let CollectedWordsFromStorage
-        console.log(answer, collections)
         if(collections != [] && collections != null){CollectedWordsFromStorage = JSON.parse(localStorage.getItem("CollectedWords"))}
         
         if(CollectedWordsFromStorage != null && CollectedWordsFromStorage.length != 0) {
             setCollections(CollectedWordsFromStorage)
-            console.log(CollectedWordsFromStorage)
         }
     },[answer])
 
@@ -448,6 +452,9 @@ function Container(){
         localStorage.setItem("CollectedWords", JSON.stringify(collections))
     },[collections])
 
+    useEffect(()=>{
+        localStorage.clear()
+    },[answer])
     return(
         <>
             <div className={!started ? "Wrapper" : "HideWrapper"}>
