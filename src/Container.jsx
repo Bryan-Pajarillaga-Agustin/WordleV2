@@ -419,7 +419,20 @@ function Container(){
     }
 
     function SetGuessedWords(){
-        setCollections([...collections, answer])
+        if(collections.length != 0){
+            for(let i = 0; i <= collections.length; i++){
+                if(collections[i] == answer && i < collections.length){
+                    break;
+                }
+
+                if(i == collections.length){
+                    setCollections([...collections, answer])
+                    break
+                }
+            }
+        } else if(collections.length == 0) {
+            setCollections([answer])
+        }
     }
 
     function Hint(){
