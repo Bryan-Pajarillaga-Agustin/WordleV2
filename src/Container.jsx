@@ -14,7 +14,7 @@ function Container(){
     const [started, setStarted] = useState(false)
     const [gold, setGold] = useState(0)
     const [showCollections, setShowCollection]= useState(false)
-    const [collections, setCollections] = useState([])
+    const [collections, setCollections] = useState(JSON.parse(localStorage.getItem("CollectedWords")) ? JSON.parse(localStorage.getItem("CollectedWords")) : [])
 
     const SubmitButton = useRef(null)
     const StartButton = useRef(null)
@@ -438,14 +438,6 @@ function Container(){
     function Hint(){
 
     }
-    useEffect(()=>{
-        let CollectedWordsFromStorage
-        if(collections != [] && collections != null){CollectedWordsFromStorage = JSON.parse(localStorage.getItem("CollectedWords"))}
-        
-        if(CollectedWordsFromStorage != null && CollectedWordsFromStorage.length != 0) {
-            setCollections(CollectedWordsFromStorage)
-        }
-    },[answer])
 
     useEffect(()=>{
         localStorage.setItem("goldStorage", gold)
@@ -453,7 +445,10 @@ function Container(){
     },[collections])
 
     useEffect(()=>{
-        console.log(answer, guess)
+        if(JSON.parse(localStorage.getItem("CollectedWords")) != null){
+            setCollections(JSON.parse(localStorage.getItem("CollectedWords")))
+        }
+        console.log(answer)
     },[answer])
     return(
         <>
