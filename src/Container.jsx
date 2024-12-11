@@ -187,8 +187,10 @@ function Container(){
         
     }
 
+    localStorage.clear()
     window.addEventListener("keyup", (e)=>CheckAnswer(e))
     function CheckAnswer(e){
+        localStorage.clear()
         let Guess = ""
         if(e.key === "Enter" || e == "Enter"){
             if(row === 1 && defineRow == row && tile === 5){
@@ -453,7 +455,7 @@ function Container(){
     },[collections])
 
     useEffect(()=>{
-        localStorage.clear()
+        console.log(answer, guess)
     },[answer])
     return(
         <>
