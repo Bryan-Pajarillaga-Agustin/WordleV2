@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Ubuntu&display=swap');
+
 *{
     padding: 0;
     margin: 0; 
@@ -271,27 +273,25 @@ button:active{
     margin: auto;
     flex-direction: column;
     align-items: center;
-    width: 300px;
-    height: 300px;
-    border-radius: 3rem;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 100vw;
+    height: 100vh;
+    font-family: "Karla", sans-serif;
     position: absolute;
-    top: 5rem;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #d1d6cf;
+    background-color: #cdcf2c;
     z-index: 3;
-    padding: 2rem;
-    justify-content: space-around;
-    border: 1rem groove black;
+    justify-content: space-evenly;
     filter: drop-shadow(0 0 .2rem green);
 }
 
 .ShowAnswer > h1,
 .UnshowAnswer > h1 {
     font-weight: 900;
-    font-size: 3rem;
+    font-size: 5rem;
     margin: 1rem;
+    color: #fbff02;
+    filter: drop-shadow(1px 1px 1px black);
 }   
 
 
@@ -299,8 +299,9 @@ button:active{
 .ShowAnswer .Scores,
 .UnshowAnswer .Scores{
     display: flex;
-    font-size: .76rem;
+    font-size: 1.5rem;
     gap: 3rem;
+    filter: drop-shadow(1px 1px .5px black);
 }
 
 .ShowAnswer .Scores > h1,
@@ -318,6 +319,7 @@ button:active{
     background-color: rgb(67, 121, 13);
     filter: drop-shadow(0 0 .2rem black);
     cursor: pointer;
+    font-size: 2rem;
     transition: all .15s linear;
 }
 
@@ -329,5 +331,12 @@ button:active{
 
 .Answer{
     font-weight: 800;
-    font-size: 1.2rem;
+    font-size: 2rem;
+    font-family: "Karla", sans-serif;
+}
+
+.Answer #answerSpan{
+    color: yellow;
+    
+    filter: drop-shadow(2px 1px 1px black);
 }
