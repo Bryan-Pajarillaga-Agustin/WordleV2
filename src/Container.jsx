@@ -276,11 +276,12 @@ function Container(){
                         }
                     }
                 }
-                if(string != Word && row == 6) {
+                if(guess != Word && row == 6) {
                     setRow(1)
                     setTiles(0)
                     setGameState(false)
                     setPage(2)
+                    setIsCorrect(false)
                     setTimeout(() => {
                         setShowAnswer(true)
                     }, 1000);
