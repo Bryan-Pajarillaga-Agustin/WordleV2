@@ -276,7 +276,15 @@ function Container(){
                         }
                     }
                 }
-                setRow(row + 1)
+                if(string != Word && row == 6) {
+                    setRow(1)
+                    setTiles(0)
+                    setGameState(false)
+                    setPage(2)
+                    setTimeout(() => {
+                        setShowAnswer(true)
+                    }, 1000);
+                } else {setRow(row + 1)}
             }
             compareScoreToHighScore
             if(Word != null){GameUpdate(guess, Word.toUpperCase())}
@@ -316,11 +324,6 @@ function Container(){
             setRow(1)
             SetGuessedWords(Word)
             setGameState(false)
-        }else if(string != Word && row == 6) {
-            setGameState(false)
-            setTimeout(() => {
-                setShowAnswer(true)
-            }, 1000);
         }
     }
 
