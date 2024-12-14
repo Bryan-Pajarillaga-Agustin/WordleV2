@@ -114,15 +114,37 @@ button:active{
 }
 .Container .row .flipGreen{
     background-color: green;
+    color: rgb(231, 231, 231);
+    border-color: white;
     animation: flipCard .5s linear;
 }
 .Container .row .flipYellow{
+    color: rgb(8, 8, 8);
+    border-color: rgb(0, 0, 0);
     background-color: yellow;
     animation: flipCard .5s linear;
 }
 .Container .row .flipGray{
     background-color: rgb(49, 49, 49);
+    color: white;
+    border-color: white;
     animation: flipCard .5s linear;
+}
+.Container .row .hintedTile{
+    background-color: #40d62c;
+    animation: hintedTile .12s linear ;
+}
+@keyframes hintedTile {
+    0%{
+        content: "";
+        transform: rotateY(0deg);
+    } 
+    50% {
+        transform: rotateY(90deg);
+    }
+    100%{
+        transform: rotateY(0deg);
+    }
 }
 
 
@@ -284,6 +306,7 @@ button:active{
 .ShowAnswer .Scores > h1,
 .UnshowAnswer .Scores > h1 {
     color: #356118;
+    text-align: center;
 }
 
 .TryAgain {
