@@ -108,11 +108,13 @@ function Container(){
     const KeyType = (e) => {if(column1.current != null){DefineTiles(e)}}
 
     function Start(){
-        setGameState(true)
         if(!gameState){
             setRow(1)
             setTiles(0)
             setScore(0)
+            setPage(1)
+            setGameState(true)
+            setIsCorrect(false)
             HandleRandomWord()
         } 
     }
@@ -279,10 +281,10 @@ function Container(){
                 if(guess != Word && row == 6) {
                     setRow(1)
                     setTiles(0)
-                    setGameState(false)
-                    setPage(2)
-                    setIsCorrect(false)
                     setTimeout(() => {
+                        setGameState(false)
+                        setPage(2)
+                        setIsCorrect(false)
                         setShowAnswer(true)
                     }, 1000);
                 } else {setRow(row + 1)}
