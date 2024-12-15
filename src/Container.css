@@ -51,7 +51,7 @@ button:active{
     justify-content: space-between;
     align-items: center;
 }
-.Container .row .column {
+.Container .row .tile {
     width: 57px;
     height: 100%;
     border: 2px solid white;
@@ -82,7 +82,7 @@ button:active{
     background-color: orange;
     color: green;
 }
-.Container .row .highlightColumn{
+.Container .row .highlightTile{
     background-color: #c5bc3fec;
     border: 2px solid black ;
     animation: animateColumn .3s linear;
@@ -240,7 +240,7 @@ button:active{
         height: 40px;
         margin-top: .5rem;
     }
-    .Container .row .column {
+    .Container .row .tile {
         width: 45px;
         height: 40px;
     }
@@ -254,12 +254,30 @@ button:active{
     }
     .Row-Keys > li{
         font-weight: 900;
-        width: 1.8rem;
-        height: 50px;
+        width: 1.7rem;
+        height: 47px;
     }
     #Enter{
-        width: 6.5rem;
+        width: 6rem;
     }
+
+    .ShowAnswer > h1,
+    .UnshowAnswer > h1{
+        font-size: 3rem;
+    }
+
+    .Answer{
+        font-size: .5rem;
+    }
+
+    .ShowAnswer .Scores,
+    .UnshowAnswer .Scores{
+        display: flex;
+        font-size: 1rem;
+        gap: 3rem;
+        filter: drop-shadow(1px 1px .5px black);
+    }
+    
 } 
 
 .UnshowAnswer{
@@ -288,21 +306,9 @@ button:active{
 .ShowAnswer > h1,
 .UnshowAnswer > h1 {
     font-weight: 900;
-    font-size: 5rem;
-    margin: 1rem;
     color: #fbff02;
     filter: drop-shadow(1px 1px 1px black);
 }   
-
-
-
-.ShowAnswer .Scores,
-.UnshowAnswer .Scores{
-    display: flex;
-    font-size: 1.5rem;
-    gap: 3rem;
-    filter: drop-shadow(1px 1px .5px black);
-}
 
 .ShowAnswer .Scores > h1,
 .UnshowAnswer .Scores > h1 {
@@ -337,6 +343,5 @@ button:active{
 
 .Answer #answerSpan{
     color: yellow;
-    
     filter: drop-shadow(2px 1px 1px black);
 }

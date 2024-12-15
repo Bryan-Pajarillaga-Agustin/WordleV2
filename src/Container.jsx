@@ -39,36 +39,36 @@ function Container(){
     const row5 = useRef(null)
     const row6 = useRef(null)
 
-    const column1 = useRef()
-    const column2 = useRef()
-    const column3 = useRef()
-    const column4 = useRef()
-    const column5 = useRef()
-    const column6 = useRef()
-    const column7 = useRef()
-    const column8 = useRef()
-    const column9 = useRef()
-    const column10 = useRef()
-    const column11 = useRef()
-    const column12 = useRef()
-    const column13 = useRef()
-    const column14 = useRef()
-    const column15 = useRef()
-    const column16 = useRef()
-    const column17 = useRef()
-    const column18 = useRef()
-    const column19 = useRef()
-    const column20 = useRef()
-    const column21 = useRef()
-    const column22 = useRef()
-    const column23 = useRef()
-    const column24 = useRef()
-    const column25 = useRef()
-    const column26 = useRef()
-    const column27 = useRef()
-    const column28 = useRef()
-    const column29 = useRef()
-    const column30 = useRef()
+    const tile1 = useRef()
+    const tile2 = useRef()
+    const tile3 = useRef()
+    const tile4 = useRef()
+    const tile5 = useRef()
+    const tile6 = useRef()
+    const tile7 = useRef()
+    const tile8 = useRef()
+    const tile9 = useRef()
+    const tile10 = useRef()
+    const tile11 = useRef()
+    const tile12 = useRef()
+    const tile13 = useRef()
+    const tile14 = useRef()
+    const tile15 = useRef()
+    const tile16 = useRef()
+    const tile17 = useRef()
+    const tile18 = useRef()
+    const tile19 = useRef()
+    const tile20 = useRef()
+    const tile21 = useRef()
+    const tile22 = useRef()
+    const tile23 = useRef()
+    const tile24 = useRef()
+    const tile25 = useRef()
+    const tile26 = useRef()
+    const tile27 = useRef()
+    const tile28 = useRef()
+    const tile29 = useRef()
+    const tile30 = useRef()
 
     const TypingKeys1 = useRef()
     const TypingKeys2 = useRef()
@@ -103,9 +103,27 @@ function Container(){
         [TypingKeys11, TypingKeys12, TypingKeys13, TypingKeys14, TypingKeys15, TypingKeys16, TypingKeys17, TypingKeys18, TypingKeys19, TypingKeys20],
         [TypingKeys21, TypingKeys22, TypingKeys23, TypingKeys24, TypingKeys25, TypingKeys26, TypingKeys27]
     ]
-    const ArrayOfColumns = [ column1, column2, column3, column4, column5, column6, column7, column8, column9, column10, column11, column12, column13, column14, column15, column16, column17, column18, column19, column20, column21, column22, column23, column24, column25, column26, column27, column28, column29, column30]
-    window.onkeydown = (e)=>{if(gameState && column1.current != null){DefineTiles(e)}}
-    const KeyType = (e) => {if(column1.current != null){DefineTiles(e)}}
+    const arrOfRowOfTiles1 = [
+        tile1, tile2, tile3, tile4, tile5
+    ]
+    const arrOfRowOfTiles2 = [
+        tile6, tile7, tile8, tile9, tile10
+    ]
+    const arrOfRowOfTiles3 = [
+        tile11, tile12, tile13, tile14, tile15
+    ]
+    const arrOfRowOfTiles4 = [
+        tile16, tile17, tile18, tile19, tile20
+    ]
+    const arrOfRowOfTiles5 = [
+        tile21, tile22, tile23, tile24, tile25
+    ]
+    const arrOfRowOfTiles6 = [
+        tile26, tile27, tile28, tile29, tile30
+    ]
+    const ArrayOftiles = [ tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9, tile10, tile11, tile12, tile13, tile14, tile15, tile16, tile17, tile18, tile19, tile20, tile21, tile22, tile23, tile24, tile25, tile26, tile27, tile28, tile29, tile30]
+    window.onkeydown = (e)=>{if(gameState && tile1.current != null){DefineTiles(e)}}
+    const KeyType = (e) => {if(tile1.current != null){DefineTiles(e)}}
 
     function Start(){
         if(!gameState){
@@ -144,19 +162,31 @@ function Container(){
             if(row < 7){
                 if((key == letters[i]) && tile != row*5){
                     for(let j = tile; j < row*5; j++){
-                        if(ArrayOfColumns[j].current.classList.contains("hintedTile")){
+                        if(ArrayOftiles[j].current.classList.contains("hintedTile")){
                             continue
                         } else {
-                            ArrayOfColumns[j].current.classList.add("highlightColumn")
-                            ArrayOfColumns[j].current.textContent = key.toUpperCase()
+                            ArrayOftiles[j].current.classList.add("highlightTile")
+                            ArrayOftiles[j].current.textContent = key.toUpperCase()
                             setTiles(tile + (j-(tile - 1)))
 
                             for(let z = j; z != row*5; z++){
-                                if(ArrayOfColumns[z+1].current.classList.contains("hintedTile")){
+                                if(ArrayOftiles[z].current == null && ArrayOftiles[z+1].current.classList.contains("hintedTile")){
                                     continue
-                                } else {
-                                    setTiles(z + 1)
-                                    break
+                                }  else {
+                                    if(ArrayOftiles[row*5] == null &&
+                                        ArrayOftiles[row*5 - 5].current.textContent != "" &&
+                                        ArrayOftiles[row*5 - 4].current.textContent != "" &&
+                                        ArrayOftiles[row*5 - 3].current.textContent != "" &&
+                                        ArrayOftiles[row*5 - 2].current.textContent != "" &&
+                                        ArrayOftiles[row*5 - 1].current.textContent != ""
+                                     ){
+                                        setTiles(row*5)
+                                        break
+                                    } else {
+                                        setTiles(z + 1)
+                                        break
+                                    }
+                                    
                                 }
                             }
                             break
@@ -164,11 +194,11 @@ function Container(){
                     }
                 } else if((key == "⌫" || key == "Backspace") && tile != (row*5)-5) {
                     for(let j = tile; j > row*5-5; j--){
-                        if(ArrayOfColumns[j-1].current.classList.contains("hintedTile")){
+                        if(ArrayOftiles[j-1].current.classList.contains("hintedTile")){
                             continue
                         } else {
-                            ArrayOfColumns[j-1].current.textContent = ""
-                            ArrayOfColumns[j-1].current.classList.remove("highlightColumn")
+                            ArrayOftiles[j-1].current.textContent = ""
+                            ArrayOftiles[j-1].current.classList.remove("highlightTile")
                             setTiles(j - 1)
                             break
                         }
@@ -184,12 +214,23 @@ function Container(){
         if(e.key === "Enter" || e == "Enter"){
             if(row <=6 && tile === row * 5){ //Simplified row check
                 for(let i = tile-5; i < tile; i++){
-                    if(ArrayOfColumns[i].current != null){Guess += ArrayOfColumns[i].current.textContent}
+                    if(ArrayOftiles[i].current != null){Guess += ArrayOftiles[i].current.textContent}
                     Guess.toString()
                 }
                 CheckGuess(Guess)
             }
         }
+    }
+
+    const deleteTiles = (index) => {
+        setTiles(index + ((row*5)-5))
+        for(let i = index + ((row*5)-5); i < row*5; i++){
+            if(ArrayOftiles[i].current.classList.contains("highlightTile")){
+                ArrayOftiles[i].current.classList.remove("highlightTile")
+                ArrayOftiles[i].current.textContent = ""
+            }
+        }
+
     }
 
     function CheckGuess(guess){
@@ -199,11 +240,11 @@ function Container(){
             if(guess.toUpperCase() == Word.toUpperCase()){
                 for(let j = tile-5; j < tile; j++){
                     setTimeout(() => {
-                        if(ArrayOfColumns[j].current.classList.contains("hintedTile")){
-                            ArrayOfColumns[j].current.classList.replace("hintedTile", "flipGreen")
+                        if(ArrayOftiles[j].current.classList.contains("hintedTile")){
+                            ArrayOftiles[j].current.classList.replace("hintedTile", "flipGreen")
                             ChangeTypingKeyColor()
                         } else {
-                            ArrayOfColumns[j].current.classList.add( "flipGreen")
+                            ArrayOftiles[j].current.classList.add( "flipGreen")
                             ChangeTypingKeyColor()
                         }
                     }, 100*(j-(tile-5)));
@@ -211,7 +252,7 @@ function Container(){
                     function ChangeTypingKeyColor(){
                         for(let row = 0; row < ArrayOfTypingKeys.length; row++){
                             for(let each = 0; each < ArrayOfTypingKeys[row].length; each++){
-                                if(ArrayOfColumns[j].current.textContent == ArrayOfTypingKeys[row][each].current.textContent.toUpperCase()){
+                                if(ArrayOftiles[j].current.textContent == ArrayOfTypingKeys[row][each].current.textContent.toUpperCase()){
                                     ArrayOfTypingKeys[row][each].current.style.backgroundColor = "green"
                                 } 
                             }
@@ -227,17 +268,17 @@ function Container(){
             } else if (guess.toUpperCase() != Word.toUpperCase()){
                 for(var j = tile - 5; j < tile; j++){
                     for(let i = 0; i < 5; i++){
-                        if(Word[(j+5)-tile] === ArrayOfColumns[j].current.textContent ){
+                        if(Word[(j+5)-tile] === ArrayOftiles[j].current.textContent ){
                             
-                            if(ArrayOfColumns[j].current.classList.contains("hintedTile")){
-                                ArrayOfColumns[j].current.classList.replace("hintedTile", "flipGreen")
+                            if(ArrayOftiles[j].current.classList.contains("hintedTile")){
+                                ArrayOftiles[j].current.classList.replace("hintedTile", "flipGreen")
                             } else {
-                                ArrayOfColumns[j].current.classList.add("flipGreen")
+                                ArrayOftiles[j].current.classList.add("flipGreen")
                             }
 
                             for(let row = 0; row < ArrayOfTypingKeys.length; row++){
                                 for(let each = 0; each < ArrayOfTypingKeys[row].length; each++){
-                                    if(ArrayOfColumns[j].current.textContent == ArrayOfTypingKeys[row][each].current.textContent.toUpperCase()){
+                                    if(ArrayOftiles[j].current.textContent == ArrayOfTypingKeys[row][each].current.textContent.toUpperCase()){
                                         ArrayOfTypingKeys[row][each].current.style.backgroundColor = "green"
                                         break
                                     } 
@@ -247,17 +288,17 @@ function Container(){
                             break
                             
                         } 
-                        else if(ArrayOfColumns[j].current.textContent == Word[i]){
+                        else if(ArrayOftiles[j].current.textContent == Word[i]){
                             
-                            if(ArrayOfColumns[j].current.classList.contains("flipGray")){
-                                ArrayOfColumns[j].current.classList.replace("flipGray", "flipYellow")
+                            if(ArrayOftiles[j].current.classList.contains("flipGray")){
+                                ArrayOftiles[j].current.classList.replace("flipGray", "flipYellow")
                             } else {
-                                ArrayOfColumns[j].current.classList.add("flipYellow")
+                                ArrayOftiles[j].current.classList.add("flipYellow")
                             }
 
                             for(let row = 0; row < ArrayOfTypingKeys.length; row++){
                                 for(let each = 0; each < ArrayOfTypingKeys[row].length; each++){
-                                    if((ArrayOfColumns[j].current.textContent == ArrayOfTypingKeys[row][each].current.textContent.toUpperCase()) && (ArrayOfTypingKeys[row][each].current.style.backgroundColor !== "green")){
+                                    if((ArrayOftiles[j].current.textContent == ArrayOfTypingKeys[row][each].current.textContent.toUpperCase()) && (ArrayOfTypingKeys[row][each].current.style.backgroundColor !== "green")){
                                         ArrayOfTypingKeys[row][each].current.style.backgroundColor = "yellow"
                                         break
                                     } 
@@ -266,10 +307,10 @@ function Container(){
                             break
                         } 
                         else {
-                            ArrayOfColumns[j].current.classList.add("flipGray")
+                            ArrayOftiles[j].current.classList.add("flipGray")
                             for(let row = 0; row < ArrayOfTypingKeys.length; row++){
                                 for(let each = 0; each < ArrayOfTypingKeys[row].length; each++){
-                                    if(ArrayOfColumns[j].current.textContent == ArrayOfTypingKeys[row][each].current.textContent.toUpperCase() && ArrayOfTypingKeys[row][each].current.style.backgroundColor != "green"){
+                                    if(ArrayOftiles[j].current.textContent == ArrayOfTypingKeys[row][each].current.textContent.toUpperCase() && ArrayOfTypingKeys[row][each].current.style.backgroundColor != "green"){
                                         ArrayOfTypingKeys[row][each].current.style.backgroundColor = "gray"
                                     } 
                                 }
@@ -331,30 +372,30 @@ function Container(){
     }
 
     function clearBoard(){
-        if(column1.current != null){
-            for(let i=0; i<ArrayOfColumns.length; i++){
-                if(ArrayOfColumns[i].current.classList.contains("highlightColumn") ){
-                    ArrayOfColumns[i].current.classList.remove("highlightColumn")
-                    ArrayOfColumns[i].current.classList.add("Unhighlight")
-                    ArrayOfColumns[i].current.textContent = ""
+        if(tile1.current != null){
+            for(let i=0; i<ArrayOftiles.length; i++){
+                if(ArrayOftiles[i].current.classList.contains("highlightTile") ){
+                    ArrayOftiles[i].current.classList.remove("highlightTile")
+                    ArrayOftiles[i].current.classList.add("Unhighlight")
+                    ArrayOftiles[i].current.textContent = ""
                 } 
     
-                if(ArrayOfColumns[i].current.classList.contains("hintedTile") ){
-                    ArrayOfColumns[i].current.classList.remove("hintedTile")
-                    ArrayOfColumns[i].current.textContent = ""
+                if(ArrayOftiles[i].current.classList.contains("hintedTile") ){
+                    ArrayOftiles[i].current.classList.remove("hintedTile")
+                    ArrayOftiles[i].current.textContent = ""
                 } 
     
-                if(ArrayOfColumns[i].current.classList.contains("flipGreen")){
-                    ArrayOfColumns[i].current.classList.remove("flipGreen")
+                if(ArrayOftiles[i].current.classList.contains("flipGreen")){
+                    ArrayOftiles[i].current.classList.remove("flipGreen")
                 }
-                if(ArrayOfColumns[i].current.classList.contains("flipYellow")){
-                    ArrayOfColumns[i].current.classList.remove("flipYellow")
+                if(ArrayOftiles[i].current.classList.contains("flipYellow")){
+                    ArrayOftiles[i].current.classList.remove("flipYellow")
                 }
-                if(ArrayOfColumns[i].current.classList.contains("flipGray")){
-                    ArrayOfColumns[i].current.classList.remove("flipGray")
+                if(ArrayOftiles[i].current.classList.contains("flipGray")){
+                    ArrayOftiles[i].current.classList.remove("flipGray")
                 }
-                if(ArrayOfColumns[i].current.classList.contains("hintedTile")){
-                    ArrayOfColumns[i].current.classList.remove("hintedTile")
+                if(ArrayOftiles[i].current.classList.contains("hintedTile")){
+                    ArrayOftiles[i].current.classList.remove("hintedTile")
                 }
             }
             for(let row = 0; row < ArrayOfTypingKeys.length; row++){
@@ -365,9 +406,9 @@ function Container(){
                     }
                 }
             }
-            for(let i=0; i<ArrayOfColumns.length; i++){
-                if(ArrayOfColumns[i].current.classList.contains("Unhighlight")){
-                    ArrayOfColumns[i].current.classList.remove("Unhighlight")
+            for(let i=0; i<ArrayOftiles.length; i++){
+                if(ArrayOftiles[i].current.classList.contains("Unhighlight")){
+                    ArrayOftiles[i].current.classList.remove("Unhighlight")
                     
                 } 
             }
@@ -408,8 +449,8 @@ function Container(){
             for(let i = (row * 5) - 5; i < row*5; i++){
                 console.log(i)
                 if(i-(row*5 - 5) == randomLetterIndex){
-                    ArrayOfColumns[i].current.classList.add("hintedTile")
-                    ArrayOfColumns[i].current.textContent = JSON.parse(localStorage.getItem("Word"))[randomLetterIndex]
+                    ArrayOftiles[i].current.classList.add("hintedTile")
+                    ArrayOftiles[i].current.textContent = JSON.parse(localStorage.getItem("Word"))[randomLetterIndex]
                     randomI.splice(random, 1)
                     break
                 }
@@ -459,48 +500,36 @@ function Container(){
                 </div>
     
                 <div className={ started ? "Container" : "HideContainer"}>
-                    <h1>Wordle</h1>
+                    <h1>{tile}</h1>
                     <div className="row row1" ref={row1}>
-                        <div className={"column"} ref={column1}></div>
-                        <div className={"column"} ref={column2}></div>
-                        <div className={"column"} ref={column3}></div>
-                        <div className={"column"} ref={column4}></div>
-                        <div className={"column"} ref={column5}></div>
+                        {arrOfRowOfTiles1.map((key, i) => {
+                            return(<div className={"tile"} onClick={()=>{if(row == 1){deleteTiles(i)}}} key={key + i} ref={arrOfRowOfTiles1[i]}></div>)
+                        })}
                     </div>
                     <div className="row row1" ref={row2}>
-                        <div className={"column"} ref={column6}></div>
-                        <div className={"column"} ref={column7}></div>
-                        <div className={"column"} ref={column8}></div>
-                        <div className={"column"} ref={column9}></div>
-                        <div className={"column"} ref={column10}></div>
+                        {arrOfRowOfTiles2.map((key, i) => {
+                            return(<div className={"tile"} onClick={()=>{if(row == 2){deleteTiles(i)}}} key={key + i} ref={arrOfRowOfTiles2[i]}></div>)
+                        })}
                     </div>
                     <div className="row row1" ref={row3}>
-                        <div className={"column"} ref={column11}></div>
-                        <div className={"column"} ref={column12}></div>
-                        <div className={"column"} ref={column13}></div>
-                        <div className={"column"} ref={column14}></div>
-                        <div className={"column"} ref={column15}></div>
+                        {arrOfRowOfTiles3.map((key, i) => {
+                            return(<div className={"tile"} onClick={()=>{if(row == 3){deleteTiles(i)}}} key={key + i} ref={arrOfRowOfTiles3[i]}></div>)
+                        })}
                     </div>
                     <div className="row row1" ref={row4}>
-                        <div className={"column"} ref={column16}></div>
-                        <div className={"column"} ref={column17}></div>
-                        <div className={"column"} ref={column18}></div>
-                        <div className={"column"} ref={column19}></div>
-                        <div className={"column"} ref={column20}></div>
+                        {arrOfRowOfTiles4.map((key, i) => {
+                            return(<div className={"tile"} onClick={()=>{if(row == 4){deleteTiles(i)}}} key={key + i} ref={arrOfRowOfTiles4[i]}></div>)
+                        })}
                     </div>
                     <div className="row row1" ref={row5}>
-                        <div className={"column"} ref={column21}></div>
-                        <div className={"column"} ref={column22}></div>
-                        <div className={"column"} ref={column23}></div>
-                        <div className={"column"} ref={column24}></div>
-                        <div className={"column"} ref={column25}></div>
+                        {arrOfRowOfTiles5.map((key, i) => {
+                            return(<div className={"tile"} onClick={()=>{if(row == 5){deleteTiles(i)}}} key={key + i} ref={arrOfRowOfTiles5[i]}></div>)
+                        })}
                     </div>
                     <div className="row row1" ref={row6}>
-                        <div className={"column"} ref={column26}></div>
-                        <div className={"column"} ref={column27}></div>
-                        <div className={"column"} ref={column28}></div>
-                        <div className={"column"} ref={column29}></div>
-                        <div className={"column"} ref={column30}></div>
+                        {arrOfRowOfTiles6.map((key, i) => {
+                            return(<div className={"tile"} onClick={()=>{if(row == 6){deleteTiles(i)}}} key={key + i} ref={arrOfRowOfTiles6[i]}></div>)
+                        })}
                     </div>
     
                     <button className="Submit" ref={SubmitButton} onClick={()=>CheckAnswer("Enter")}>Submit</button>
