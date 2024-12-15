@@ -503,7 +503,7 @@ function Container(){
                 <TopComponents gold={gold} score={score} setShowCollection={(e)=>setShowCollection(e)}  Hint={()=>{Hint()}}  />
     
                 <div className={ started ? "Container" : "HideContainer"}>
-                <h1>Wordle</h1>
+                <h1>{window.innerWidth} , {window.innerHeight}</h1>
                     <div className="row row1" ref={row1}>
                         {arrOfRowOfTiles1.map((key, i) => {
                             return(<div className={"tile"} onClick={()=>{if(row == 1){deleteTiles(i)}}} key={key + i} ref={arrOfRowOfTiles1[i]}></div>)
