@@ -246,16 +246,17 @@ button:active{
     }
 
     .Keyboard_Wrapper{
-        width: 380px;
+        width: 300px;
         height: 200px;
     }
     .Keyboard_Wrapper .Row-Keys{
-        width: 380px;
+        width: 300px;
     }
     .Row-Keys > li{
         font-weight: 900;
         width: 1.7rem;
         height: 47px;
+        margin: 0;
     }
     #Enter{
         width: 6rem;
