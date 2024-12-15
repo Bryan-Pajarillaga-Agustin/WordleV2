@@ -1,4 +1,4 @@
-.GameContents{
+.TopComponents{
     display: flex;
     width: 100.5vw;
     height: fit-content;
@@ -9,14 +9,14 @@
     padding-top: .5rem;
     border-top: .5rem solid green ;
 }
-.GameContents button{
+.TopComponents button{
     border: 1px solid orange;
     border-radius: .25rem;
     color: orange;
     background-color: green;
     box-shadow: 0 0 1rem  -5px black;
 }
-.GameContents > div {
+.TopComponents > div {
     width: 33%;
 }
 
