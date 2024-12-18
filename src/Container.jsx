@@ -224,9 +224,7 @@ function Container(){
         for(let i = index; i <= row*5; i++){
             if(ArrayOftiles[i].current.textContent == ""){
                 break
-            }
-
-            if(i = row*5){
+            } else if(i == row*5){
                 setTiles((row*5 - 5)+index)
                 activate()
             }
