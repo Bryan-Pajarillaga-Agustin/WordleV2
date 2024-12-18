@@ -221,10 +221,12 @@ function Container(){
     }
 
     const deleteTiles = (index) => {
-        for(let i = index; i <= row*5; i++){
-            if(ArrayOftiles[i].current.textContent == ""){
+        for(let i = (row*5 - 5)+index; i <= row*5; i++){
+            if(ArrayOftiles[(row*5 - 5) + index].current.textContent == ""){
                 break
-            } else if(i == row*5){
+            }
+            
+            if(i == row*5){
                 setTiles((row*5 - 5)+index)
                 activate()
             }
@@ -235,6 +237,8 @@ function Container(){
                 if(ArrayOftiles[i].current.classList.contains("highlightTile")){
                     ArrayOftiles[i].current.classList.remove("highlightTile")
                     ArrayOftiles[i].current.textContent = ""
+                } else if(ArrayOftiles[i].current.classList.contains("hintedTile")){
+                    continue
                 }
             }
         }
