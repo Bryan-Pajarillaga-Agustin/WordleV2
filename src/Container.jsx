@@ -227,7 +227,7 @@ function Container(){
             }
 
             if(i = row*5){
-                setTiles(index)
+                setTiles((row*5 - 5)+index)
                 activate()
             }
         }
