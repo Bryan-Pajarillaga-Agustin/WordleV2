@@ -1,0 +1,57 @@
+.VerificationPrompt, .unShowVerificationPrompt{
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    font-family: "Karla", sans-serif;
+    background-color: #d5f715;
+    filter: drop-shadow(0 0 0.15rem black);
+    padding: 1rem;
+    border-radius: 1.2rem;
+    font-weight: 800;
+}
+
+.VerificationPrompt{
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.unShowVerificationPrompt{
+    display: none;
+}
+
+.VerificationPrompt h1, .unShowVerificationPrompt h1{
+    color: orange;
+    text-shadow: 1px 1px 1px rgb(12, 77, 173);
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.VerificationPrompt .display_Flex, .unShowVerificationPrompt .display_Flex {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.display_Flex .options{
+    font-family: "Karla", "Ubuntu";
+    font-weight: 750;
+    font-size: 1.4rem;
+    width: 3.5rem;
+    border: 1.5px solid orange;
+    border-radius: .25rem;
+    box-shadow: 0 0 5px 1px rgb(19, 117, 10);
+    outline: none;
+    background-color: green;
+    transition: all .15s linear;
+}
+
+.display_Flex .options:hover{
+    background-color: orange;
+    columns: green;
+
+}

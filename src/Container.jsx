@@ -221,11 +221,23 @@ function Container(){
     }
 
     const deleteTiles = (index) => {
-        setTiles(index + ((row*5)-5))
-        for(let i = index + ((row*5)-5); i < row*5; i++){
-            if(ArrayOftiles[i].current.classList.contains("highlightTile")){
-                ArrayOftiles[i].current.classList.remove("highlightTile")
-                ArrayOftiles[i].current.textContent = ""
+        for(let i = index; i <= row*5; i++){
+            if(ArrayOftiles[i].current.textContent == ""){
+                break
+            }
+
+            if(i = row*5){
+                setTiles(index)
+                activate()
+            }
+        }
+
+        function activate(){
+            for(let i = index + ((row*5)-5); i < row*5; i++){
+                if(ArrayOftiles[i].current.classList.contains("highlightTile")){
+                    ArrayOftiles[i].current.classList.remove("highlightTile")
+                    ArrayOftiles[i].current.textContent = ""
+                }
             }
         }
 
@@ -433,12 +445,16 @@ function Container(){
     }
 
     function Hint(boolean){
-        if(boolean == true){
+        if(boolean == "true" && gold >= 20){
             setRandomNum(Math.random() * 1)
             setGold(gold - 20)
             setShowVerificationPrompt(false)
         } else {    
             setShowVerificationPrompt(false)
+        }
+
+        if(boolean == "true" && gold < 20){
+            window.prompt("You dont have enough Gold!")
         }
     }
 
@@ -500,10 +516,10 @@ function Container(){
                     </button>
                 </div>  
     
-                <TopComponents gold={gold} score={score} setShowCollection={(e)=>setShowCollection(e)}  Hint={()=>{Hint()}}  />
+                <TopComponents gold={gold} score={score} setShowCollection={(e)=>setShowCollection(e)}  setShowVerificationPrompt={(e)=>{setShowVerificationPrompt(e)}}  />
     
                 <div className={ started ? "Container" : "HideContainer"}>
-                <h1>{window.innerWidth} , {window.innerHeight}</h1>
+                <h1>Wordle</h1>
                     <div className="row row1" ref={row1}>
                         {arrOfRowOfTiles1.map((key, i) => {
                             return(<div className={"tile"} onClick={()=>{if(row == 1){deleteTiles(i)}}} key={key + i} ref={arrOfRowOfTiles1[i]}></div>)
@@ -542,7 +558,7 @@ function Container(){
     
                 <WordCollections showCollections={showCollections} collections={collections} setShowCollection={(e)=>setShowCollection(e)}/>
 
-                <VerificationPrompt Hint={(e)=>Hint(e)}/>
+                <VerificationPrompt showVerificationPrompt={showVerificationPrompt} setShowVerificationPrompt={(e)=>setShowVerificationPrompt(e)} Hint={(e)=>Hint(e)}/>
             </>
     
             
@@ -554,7 +570,7 @@ function Container(){
                     <h1>{isCorrect ? "You Win!" : "You Lose"}</h1>
                     <p className="Answer">The Word Is: <span id="answerSpan">{JSON.parse(localStorage.getItem("Word"))}</span></p>
                     <div className="Scores">
-                        <h1 className="Score">High Score: {JSON.parse(localStorage.getItem("highScore"))}</h1>
+                        <h1 className="Score">High Score: {highScore}</h1>
                         <h1 className="Score">Your Score: {score}</h1>
                     </div>
                     <button className="TryAgain" onClick={()=>{

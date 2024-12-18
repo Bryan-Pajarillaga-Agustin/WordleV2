@@ -246,15 +246,15 @@ button:active{
     }
 
     .Keyboard_Wrapper{
-        width: 300px;
+        width: 340px;
         height: 200px;
     }
     .Keyboard_Wrapper .Row-Keys{
-        width: 300px;
+        width: 340px;
     }
     .Row-Keys > li{
         font-weight: 900;
-        width: 1.7rem;
+        width: 2rem;
         height: 47px;
         margin: 0;
     }

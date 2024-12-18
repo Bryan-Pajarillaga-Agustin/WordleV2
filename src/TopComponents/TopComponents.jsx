@@ -1,5 +1,5 @@
 import "./TopComponents.css"
-export default function TopComponents({gold, score, setShowCollection, Hint}){
+export default function TopComponents({gold, score, setShowCollection, setShowVerificationPrompt}){
     return(
         <div className="TopComponents">
             <div className="leftContents">
@@ -10,7 +10,7 @@ export default function TopComponents({gold, score, setShowCollection, Hint}){
                 <h2 id="Score">Score: {score}</h2>
             </div>
             <div className="rightContents">
-                <button className="HintButton" onClick={()=>Hint()}>Hint</button>
+                <button className="HintButton" onClick={()=>setShowVerificationPrompt(true)}>Hint</button>
             </div>
         </div>
     )
