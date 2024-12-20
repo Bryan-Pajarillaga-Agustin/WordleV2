@@ -66,6 +66,7 @@
 
 .rightContents{
     display: flex;
+    flex-direction: column;
 }
 .rightContents > button{
     margin-left: auto;
