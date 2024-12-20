@@ -507,6 +507,8 @@ function Container(){
         if(score >= JSON.parse(localStorage.getItem("highScore"))){
             setHighScore(score)
             localStorage.setItem("highScore", JSON.stringify(score))
+        } else {
+            setHighScore(JSON.parse(localStorage.getItem("highScore")))
         }
     },[score])
     if(page === 1){
